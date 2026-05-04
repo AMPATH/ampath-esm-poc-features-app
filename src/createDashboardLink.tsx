@@ -1,9 +1,13 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { DashboardExtension, type DashboardExtensionProps, type IconId } from '@openmrs/esm-framework';
+import { DashboardExtension } from '@openmrs/esm-framework';
 
-export const createDashboardLink = (config: Omit<DashboardExtensionProps, 'icon'> & { icon?: IconId }) => () => (
-  <BrowserRouter>
-    <DashboardExtension path={config.path} title={config.title} basePath={config.basePath} icon={config.icon} />
-  </BrowserRouter>
-);
+export function createDashboardLink(db: any) {
+  return function ({ basePath }: { basePath: string }) {
+    return (
+      <BrowserRouter>
+        <DashboardExtension basePath={basePath} title={db.title} path={db.path} icon={db.icon} />
+      </BrowserRouter>
+    );
+  };
+}

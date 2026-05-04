@@ -1,0 +1,30 @@
+.userFeedbackFormLayout{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    background-color: #FFF;
+    .formHeader{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        row-gap: 10px;
+    }
+    .formContent{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        row-gap: 10px;
+    }
+}
+.formRow{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 15px;
+}

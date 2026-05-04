@@ -11,14 +11,28 @@
       "slot": "Boxes"
     },
     {
-      "name": "Blue box",
-      "component": "blueBox",
-      "slot": "Boxes"
+      "name": "hiv-summary-dashboard",
+      "slot": "patient-chart-dashboard-slot",
+      "component": "hivSummaryPatientChartLink",
+      "meta": {
+        "slot": "patient-chart-hiv-summary-dashboard-slot",
+        "path": "hiv-summary",
+        "layoutMode": "anchored"
+      },
+      "online": true,
+      "offline": true
     },
-        {
-      "name": "Brand box",
-      "component": "blueBox",
-      "slot": "Boxes"
+    {
+      "name": "hiv-summary",
+      "slot": "patient-chart-hiv-summary-dashboard-slot",
+      "component": "hivSummary",
+      "order": 1,
+      "meta": {
+        "title": "Hiv Summary",
+        "view": "hivSummary"
+      },
+      "online": true,
+      "offline": true
     }
   ],
   "pages": [

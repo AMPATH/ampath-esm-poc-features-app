@@ -1,49 +1,22 @@
-/**
- * This is the entrypoint file of the application. It communicates the
- * important features of this microfrontend to the app shell. It
- * connects the app shell to the React application(s) that make up this
- * microfrontend.
- */
-import { getAsyncLifecycle, defineConfigSchema } from '@openmrs/esm-framework';
+import { getAsyncLifecycle, defineConfigSchema, getSyncLifecycle } from '@openmrs/esm-framework';
 import { configSchema } from './config-schema';
+import { createDashboardLink as openMrsCreateDashboardLink } from '@openmrs/esm-patient-common-lib';
+import { hivSummaryPatientChartMeta } from './dashboard-meta/hiv-summary-patient-chart.meta'
 
-const moduleName = '@openmrs/esm-template-app';
+export const moduleName = '@ampath/esm-poc-features-app';
 
 const options = {
-  featureName: 'root-world',
+  featureName: 'poc-features',
   moduleName,
 };
 
-/**
- * This tells the app shell how to obtain translation files: that they
- * are JSON files in the directory `../translations` (which you should
- * see in the directory structure).
- */
-export const importTranslation = require.context('../translations', false, /.json$/, 'lazy');
 
-/**
- * This function performs any setup that should happen at microfrontend
- * load-time (such as defining the config schema) and then returns an
- * object which describes how the React application(s) should be
- * rendered.
- */
 export function startupApp() {
   defineConfigSchema(moduleName, configSchema);
 }
 
-/**
- * This named export tells the app shell that the default export of `root.component.tsx`
- * should be rendered when the route matches `root`. The full route
- * will be `openmrsSpaBase() + 'root'`, which is usually
- * `/openmrs/spa/root`.
- */
 export const root = getAsyncLifecycle(() => import('./root.component'), options);
 
-/**
- * The following are named exports for the extensions defined in this frontend modules. See the `routes.json` file to see how these are used.
- */
-export const redBox = getAsyncLifecycle(() => import('./boxes/extensions/red-box.component'), options);
+export const hivSummary = getAsyncLifecycle(() => import('./hiv-summary/hiv-summary.component'), options);
 
-export const blueBox = getAsyncLifecycle(() => import('./boxes/extensions/blue-box.component'), options);
-
-export const brandBox = getAsyncLifecycle(() => import('./boxes/extensions/brand-box.component'), options);
+export const hivSummaryPatientChartLink = getSyncLifecycle(openMrsCreateDashboardLink(hivSummaryPatientChartMeta as any), options);

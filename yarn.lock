@@ -18,6 +18,7 @@ __metadata:
   dependencies:
     "@carbon/react": "npm:^1.83.0"
     "@openmrs/esm-framework": "npm:next"
+    "@openmrs/esm-patient-common-lib": "npm:next"
     "@openmrs/esm-styleguide": "npm:next"
     "@playwright/test": "npm:^1.52.0"
     "@swc/cli": "npm:^0.3.12"
@@ -35,6 +36,7 @@ __metadata:
     "@types/webpack-env": "npm:^1.18.1"
     "@typescript-eslint/eslint-plugin": "npm:^7.8.0"
     "@typescript-eslint/parser": "npm:^7.8.0"
+    css-loader: "npm:^6.8.1"
     dayjs: "npm:^1.11.13"
     dotenv: "npm:^16.0.3"
     eslint: "npm:^8.50.0"
@@ -58,10 +60,13 @@ __metadata:
     react-i18next: "npm:^16.0.0"
     react-router-dom: "npm:^6.14.1"
     rxjs: "npm:^6.6.7"
+    swc-loader: "npm:^0.2.3"
+    swr: "npm:^2.2.4"
     turbo: "npm:^2.5.2"
     typescript: "npm:^5.0.0"
   peerDependencies:
     "@openmrs/esm-framework": 9.x
+    "@openmrs/esm-patient-common-lib": "*"
     dayjs: 1.x
     react: 18.x
     react-i18next: 16.x
@@ -2908,6 +2913,21 @@ __metadata:
     "@openmrs/esm-state": 9.x
     rxjs: 6.x
   checksum: 10/f68ee1598ea362eb502eb0ba15df7b4762bb5d7432247f98b6bf0db13abee30e6bf50876d99adbdf3a8b3596959af6aa0d4ab8c005ba677bf8850595a1cb3301
+  languageName: node
+  linkType: hard
+
+"@openmrs/esm-patient-common-lib@npm:next":
+  version: 12.1.1-pre.11040
+  resolution: "@openmrs/esm-patient-common-lib@npm:12.1.1-pre.11040"
+  dependencies:
+    "@carbon/react": "npm:^1.83.0"
+    lodash-es: "npm:^4.18.1"
+    uuid: "npm:^8.3.2"
+  peerDependencies:
+    "@openmrs/esm-framework": 9.x
+    react: 18.x
+    single-spa: 6.x
+  checksum: 10/961c9778de378c0e64f15be9ed5744ace00f7d794e90d9ac588a512c409db287d19dc7d757b0a74e347b102bffdd5a6372bf7b194befc78ed41661f162be1afb
   languageName: node
   linkType: hard
 
@@ -7272,6 +7292,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-loader@npm:^6.8.1":
+  version: 6.11.0
+  resolution: "css-loader@npm:6.11.0"
+  dependencies:
+    icss-utils: "npm:^5.1.0"
+    postcss: "npm:^8.4.33"
+    postcss-modules-extract-imports: "npm:^3.1.0"
+    postcss-modules-local-by-default: "npm:^4.0.5"
+    postcss-modules-scope: "npm:^3.2.0"
+    postcss-modules-values: "npm:^4.0.0"
+    postcss-value-parser: "npm:^4.2.0"
+    semver: "npm:^7.5.4"
+  peerDependencies:
+    "@rspack/core": 0.x || 1.x
+    webpack: ^5.0.0
+  peerDependenciesMeta:
+    "@rspack/core":
+      optional: true
+    webpack:
+      optional: true
+  checksum: 10/9e3665509f6786d46683de5c5f5c4bdd4aa62396b4017b41dbbb41ea5ada4012c80ee1e3302b79b504bc24da7fa69e3552d99006cecc953e0d9eef4a3053b929
+  languageName: node
+  linkType: hard
+
 "css-select@npm:^4.1.3":
   version: 4.3.0
   resolution: "css-select@npm:4.3.0"
@@ -11536,6 +11580,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash-es@npm:^4.18.1":
+  version: 4.18.1
+  resolution: "lodash-es@npm:4.18.1"
+  checksum: 10/8bfad225ef09ef42b04283cdaf7830efcc2ba29ae41b56501c74422155ee1ccaa1f0f6e8319def3451a1fe54dec501c8e4bee622bae2b2d98ac993731e0a5cce
+  languageName: node
+  linkType: hard
+
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -13056,7 +13107,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-extract-imports@npm:^3.0.0":
+"postcss-modules-extract-imports@npm:^3.0.0, postcss-modules-extract-imports@npm:^3.1.0":
   version: 3.1.0
   resolution: "postcss-modules-extract-imports@npm:3.1.0"
   peerDependencies:
@@ -13065,7 +13116,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-local-by-default@npm:^4.0.0":
+"postcss-modules-local-by-default@npm:^4.0.0, postcss-modules-local-by-default@npm:^4.0.5":
   version: 4.2.0
   resolution: "postcss-modules-local-by-default@npm:4.2.0"
   dependencies:
@@ -13078,7 +13129,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules-scope@npm:^3.0.0":
+"postcss-modules-scope@npm:^3.0.0, postcss-modules-scope@npm:^3.2.0":
   version: 3.2.1
   resolution: "postcss-modules-scope@npm:3.2.1"
   dependencies:
@@ -13125,6 +13176,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/9e4fbe97574091e9736d0e82a591e29aa100a0bf60276a926308f8c57249698935f35c5d2f4e80de778d0cbb8dcffab4f383d85fd50c5649aca421c3df729b86
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.4.33":
+  version: 8.5.13
+  resolution: "postcss@npm:8.5.13"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/4763873c0a39a6f71fc552d0046fedb80dca889ed0b85e36217285f754a3bd003a906f6088feb266b1f53b0ad20483a475dce4cc1c756f05e27940c51e40ebd8
   languageName: node
   linkType: hard
 
@@ -14985,7 +15047,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swc-loader@npm:0.2.7":
+"swc-loader@npm:0.2.7, swc-loader@npm:^0.2.3":
   version: 0.2.7
   resolution: "swc-loader@npm:0.2.7"
   dependencies:
@@ -15006,6 +15068,18 @@ __metadata:
   peerDependencies:
     react: ^16.11.0 || ^17.0.0 || ^18.0.0
   checksum: 10/f02b3bd5a198a0f62f9a53d7c0528c4a58aa61a43310bea169614b6e873dadb52599e856ef0775405b6aa7409835343da0cf328948aa892aa309bf4b7e7d6902
+  languageName: node
+  linkType: hard
+
+"swr@npm:^2.2.4":
+  version: 2.4.1
+  resolution: "swr@npm:2.4.1"
+  dependencies:
+    dequal: "npm:^2.0.3"
+    use-sync-external-store: "npm:^1.6.0"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/611c0a39d42abb7d7eae37eb36e6a30a8a2c387bab6026d8db13ae41b9f8f3c2a187486008781de3f083ef5b39e6d90af1f275a73ade882a567e338166266356
   languageName: node
   linkType: hard
 

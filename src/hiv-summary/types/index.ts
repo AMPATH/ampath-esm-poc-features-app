@@ -192,3 +192,19 @@ export type HivSummaryParams = {
   includeNonClinicalEncounter: boolean;
   isHEIActive: boolean;
 }
+
+export type MedicationChangeHistory = {
+    encounter_datetime:string;
+    previous_vl_date:string;
+    current_regimen:string;
+    previous_regimen:string;
+    previous_vl:number | null;
+    cur_arv_line: string;
+}
+
+export type MedicationReportApiResp = {
+    schemas: any;
+    sqlQuery: string;
+    size:number;
+    result: MedicationChangeHistory[];
+}

@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import styles from './hiv-summary.component.scss';
 import { InlineLoading, Tab, TabList, TabPanel, TabPanels, Tabs } from "@carbon/react";
 import { usePatient } from "@openmrs/esm-framework";
-import { type HivSummaryParams, type HivSummary } from "./types";
+import { type HivSummaryParams, type HivSummary, type MedicationChangeHistory } from "./types";
 import { fetchHivSummary } from "./hiv-summary-resource";
 import LatestHivSummary from "./latest-hiv-summary/latest-hiv-summary.component";
 import HistoricalHivSummary from "./historical-hiv-summary/historical-hiv-summary.component";
+import { fetchPatientMedicationHistoryReport } from "./medication-change-history/medication-change-history.resource";
+import MedicationChangeHistorySummary from "./medication-change-history/medication-change-history.component";
 interface HivSummaryProps { }
 const HivSummary: React.FC<HivSummaryProps> = () => {
   const { isLoading, error, patient } = usePatient();
   const [ hivSummary,setHivSummary] = useState<HivSummary[]>([]);
+  const [medicationHistoryChange,setMedicationHistoryChange] = useState<MedicationChangeHistory[]>([]);
   const latestHivSummary = hivSummary[0] ?? null;
   const [loading,setLoading] = useState<boolean>(false);
   useEffect(()=>{
     if(patient){
        getPatientHivSummary(patient.id);
+       getPatientMedicationChangeHistory(patient.id);
     }
     
   },[patient]);
@@ -35,8 +39,20 @@ const HivSummary: React.FC<HivSummaryProps> = () => {
             if(resp){
                 setHivSummary(resp);
             }
-      }catch(error: any){
-
+      }finally{
+           setLoading(false);
+      }
+     
+      
+  }
+    async function getPatientMedicationChangeHistory(patientUuid: string){
+      setLoading(true);
+      
+      try{
+           const resp = await fetchPatientMedicationHistoryReport(patientUuid);
+            if(resp){
+                setMedicationHistoryChange(resp);
+            }
       }finally{
            setLoading(false);
       }
@@ -62,15 +78,6 @@ const HivSummary: React.FC<HivSummaryProps> = () => {
                         <Tab>
                             Viral Load and Treamnent Changes Tracker
                         </Tab>
-                        <Tab>
-                            Hiv Clinical Summary
-                        </Tab>
-                        <Tab>
-                            Previous Visit Summary
-                        </Tab>
-                        <Tab>
-                            AHD Events Summary
-                        </Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>
@@ -80,7 +87,7 @@ const HivSummary: React.FC<HivSummaryProps> = () => {
                              { hivSummary && <HistoricalHivSummary hivSummaries={hivSummary}/>}
                         </TabPanel>
                         <TabPanel>
-                             Viral Load and Treamnent Changes Tracker
+                             { medicationHistoryChange && <MedicationChangeHistorySummary medicationChangeHistory={medicationHistoryChange} /> }
                         </TabPanel>
                         <TabPanel>
                              Hiv Clinical Summary

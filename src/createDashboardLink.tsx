@@ -4,9 +4,10 @@ import { DashboardExtension } from '@openmrs/esm-framework';
 
 export function createDashboardLink(db: any) {
   return function ({ basePath }: { basePath: string }) {
+    const base = basePath ? basePath : db.basePath;
     return (
       <BrowserRouter>
-        <DashboardExtension basePath={basePath} title={db.title} path={db.path} icon={db.icon} />
+        <DashboardExtension basePath={base} title={db.title} path={db.path} icon={db.icon} />
       </BrowserRouter>
     );
   };

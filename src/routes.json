@@ -41,6 +41,25 @@
       "component": "userFeedbackForm",
       "name": "user-feedback",
       "slot": "user-feedback-dashboard-slot"
+    },
+     {
+      "name": "clinical-notes-dashboard",
+      "slot": "patient-chart-dashboard-slot",
+      "component": "clinicalNotesPatientChartLink",
+      "meta": {
+        "slot": "patient-chart-clinical-notes-dashboard-slot",
+        "path": "clinical-notes",
+        "layoutMode": "anchored"
+      },
+      "online": true,
+      "offline": true
+    },
+    {
+      "name": "clinical-notes",
+      "slot": "patient-chart-clinical-notes-dashboard-slot",
+      "component": "clinicalNotes",
+      "online": true,
+      "offline": true
     }
   ],
   "pages": [

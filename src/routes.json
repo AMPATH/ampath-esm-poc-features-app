@@ -60,6 +60,17 @@
       "component": "clinicalNotes",
       "online": true,
       "offline": true
+    },
+    {
+      "name": "clinical-summary",
+      "slot": "patient-chart-summary-dashboard-slot",
+      "component": "clinicalSummary",
+      "order":0,
+      "meta": {
+        "fullWidth": true
+      },
+      "online": true,
+      "offline": true
     }
   ],
   "pages": [

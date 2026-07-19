@@ -26,8 +26,15 @@ export const configSchema = {
     _description: 'ETL Endpoint',
     _default: '',
   },
+  tbScreeningConceptUuid: {
+    _type: Type.String,
+    _description:
+      'Concept UUID for the TB screening result observation. Used by the Clinical Summary widget as a fallback when the ETL endpoint does not return TB status.',
+    _default: '',
+  },
 };
 
 export type Config = {
   etlBaseUrl: string;
+  tbScreeningConceptUuid: string;
 };

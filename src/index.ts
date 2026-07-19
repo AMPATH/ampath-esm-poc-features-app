@@ -30,3 +30,6 @@ export const userFeedbackForm = getAsyncLifecycle(() => import('./user-feedback/
 export const clinicalNotesPatientChartLink = getSyncLifecycle(createDashboardLink(clinicalNotesPatientChartMeta as any), options);
 export const clinicalNotes = getAsyncLifecycle(() => import('./clinical-notes/clinical-notes.component'), options);
 
+//clinical summary
+export const clinicalSummary = getAsyncLifecycle(() => import('./clinical-summary/clinical-summary.component'), options);
+

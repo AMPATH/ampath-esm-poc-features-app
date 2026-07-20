@@ -4,6 +4,28 @@
   width: 100%;
   background-color: #fff;
 
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding: 0.75rem 0 0.75rem 1rem;
+
+    h4 {
+      margin: 0;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #525252;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 2rem;
+        padding-top: 0.188rem;
+        border-bottom: 0.375rem solid var(--brand-03);
+      }
+    }
+  }
+
   .clinicalSummaryContent {
     display: flex;
     flex-direction: column;

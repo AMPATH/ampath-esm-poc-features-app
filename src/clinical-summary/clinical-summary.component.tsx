@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './clinical-summary.component.scss';
 import {
   InlineLoading,
+  Pagination,
   Tab,
   TabList,
   TabPanel,
@@ -16,7 +17,6 @@ import {
   Tag,
 } from '@carbon/react';
 import { usePatient } from '@openmrs/esm-framework';
-import { CardHeader, PatientChartPagination } from '@openmrs/esm-patient-common-lib';
 import { type ClinicalSummaryApiResponse, type ClinicalSummaryParams } from './types';
 import { fetchClinicalSummary } from './clinical-summary.resource';
 import { formatStringDate } from '../shared/utils/format-string-date';
@@ -76,7 +76,9 @@ const ClinicalSummary: React.FC<ClinicalSummaryProps> = () => {
 
   return (
     <div className={styles.clinicalSummaryLayout}>
-      <CardHeader title="Patient Visit Summary">{null}</CardHeader>
+      <div className={styles.cardHeader}>
+        <h4>Patient Visit Summary</h4>
+      </div>
       <div className={styles.clinicalSummaryContent}>
         {loading ? (
           <InlineLoading description="Fetching patient visit summary..please wait" />
@@ -155,12 +157,12 @@ const ClinicalSummary: React.FC<ClinicalSummaryProps> = () => {
                         ))}
                       </TableBody>
                     </Table>
-                    <PatientChartPagination
-                      currentItems={paginatedEncounters.length}
-                      totalItems={encounters.length}
-                      pageNumber={encounterPage}
+                    <Pagination
+                      page={encounterPage}
                       pageSize={encounterPageSize}
-                      onPageNumberChange={({ page, pageSize }) => {
+                      pageSizes={[5, 10, 20, 50]}
+                      totalItems={encounters.length}
+                      onChange={({ page, pageSize }) => {
                         setEncounterPage(page);
                         setEncounterPageSize(pageSize);
                       }}
